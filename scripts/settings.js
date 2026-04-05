@@ -41,7 +41,7 @@ export function registerEladrinOptIn() {
 
     buttons.unshift({
       class: "eladrin-opt-in",
-      icon: isOptedIn ? "fas fa-leaf" : "far fa-leaf",
+      icon: isOptedIn ? "fas fa-cloud-sun" : "far fa-cloud-sun",
       label: isOptedIn ? "Eladrin: On" : "Eladrin: Off",
       onclick: async () => {
         await actor.setFlag(MODULE_ID, "eladrinOptIn", !isOptedIn);

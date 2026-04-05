@@ -24,7 +24,7 @@ export class EladrinSeasonDialog extends HandlebarsApplicationMixin(
     classes: ["eladrin"],
     window: {
       title: "ELADRIN.DialogTitle",
-      icon: "fas fa-leaf",
+      icon: "fas fa-cloud-sun",
       resizable: false,
     },
     position: { width: 380, height: "auto" },

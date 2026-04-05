@@ -30,7 +30,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
   tokenControls.tools.eladrinSeason = {
     name: "eladrinSeason",
     title: game.i18n.localize("ELADRIN.ControlButton"),
-    icon: "fa-solid fa-leaf",
+    icon: "fa-solid fa-cloud-sun",
     onClick: () => openEladrinDialog(),
     button: true,
   };
