@@ -1,0 +1,12 @@
+# Dev files
+CLAUDE.md
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# LevelDB lock/log files (pack data IS tracked)
+packs/**/LOCK
+packs/**/LOG
+packs/**/LOG.old

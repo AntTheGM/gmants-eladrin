@@ -39,8 +39,8 @@ async function copyImageForSeason(sourcePath, actorId, seasonId, imageType) {
     // Determine file extension
     const ext = cleanPath.split(".").pop() || "webp";
 
-    // Fetch the image data
-    const response = await fetch(sourcePath);
+    // Fetch the image data (bypass browser cache to get the latest version)
+    const response = await fetch(sourcePath, { cache: "reload" });
     if (!response.ok) {
       console.warn(`${MODULE_ID} | Failed to fetch image: ${sourcePath}`);
       return sourcePath;
