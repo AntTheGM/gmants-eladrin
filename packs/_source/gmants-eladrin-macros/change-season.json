@@ -1,0 +1,26 @@
+{
+  "_id": "eldrn5eChgSeasn1",
+  "name": "Change Season",
+  "type": "script",
+  "author": "SYixMRBTMbFoSMVo",
+  "command": "const mod = game.modules.get('gmants-eladrin');\nif (!mod?.active) {\n  ui.notifications.error(\"GMAnt's Eladrin module is not active.\");\n} else {\n  mod.api.open();\n}",
+  "scope": "global",
+  "img": "icons/magic/nature/leaf-glow-triple-orange.webp",
+  "folder": null,
+  "sort": 100,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "13.351",
+    "systemId": "dnd5e",
+    "systemVersion": "5.2.5",
+    "createdTime": 1743465600000,
+    "modifiedTime": 1743465600000,
+    "lastModifiedBy": "SYixMRBTMbFoSMVo"
+  },
+  "_key": "!macros!eldrn5eChgSeasn1"
+}

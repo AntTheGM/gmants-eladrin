@@ -1,0 +1,36 @@
+{
+  "ELADRIN.DialogTitle": "Eladrin Season",
+  "ELADRIN.ControlButton": "Eladrin Season",
+
+  "ELADRIN.CurrentSeason": "Current Season",
+  "ELADRIN.ChangeTo": "Change to {season}",
+  "ELADRIN.ConfigHeader": "Season Configuration",
+  "ELADRIN.SaveCurrent": "Save Current as {season}",
+  "ELADRIN.NoImages": "No images saved",
+  "ELADRIN.Token": "Token",
+  "ELADRIN.Portrait": "Portrait",
+  "ELADRIN.ChatChange": "{name} shifts to their {season} aspect.",
+  "ELADRIN.NoSeason": "No season set. Choose a season to begin.",
+  "ELADRIN.ImageSaved": "Saved current look as {season}.",
+  "ELADRIN.NoImagesForSeason": "No images saved for {season}. Save a look first in the configuration section.",
+  "ELADRIN.SeasonChanged": "Changed to {season}.",
+
+  "ELADRIN.Season.spring": "Spring",
+  "ELADRIN.Season.summer": "Summer",
+  "ELADRIN.Season.autumn": "Autumn",
+  "ELADRIN.Season.winter": "Winter",
+
+  "ELADRIN.DeleteImages": "Delete saved images",
+  "ELADRIN.DeleteImagesTitle": "Delete {season} Images",
+  "ELADRIN.DeleteImagesConfirm": "Delete saved images for {season}? This will remove the copied files but will not affect the current token or portrait.",
+  "ELADRIN.ImagesDeleted": "Saved images for {season} have been deleted.",
+
+  "ELADRIN.Settings.UseMidiQol": "Enhanced Automation (Fey Step)",
+  "ELADRIN.Settings.UseMidiQolHint": "When enabled, season changes rename your existing Fey Step item instead of swapping it, preserving any MIDI QOL automation and effects. Requires: MIDI QOL. Optional: Sequencer + JB2A for teleport animations.",
+
+  "ELADRIN.Settings.ShowEladrinButton": "Show Eladrin Season Button",
+  "ELADRIN.Settings.ShowEladrinButtonHint": "Display the Eladrin Season leaf icon in the token controls sidebar. Disable to hide the button (you can still open the dialog via macro).",
+
+  "ELADRIN.Error.NoActor": "Select a token or assign a character first.",
+  "ELADRIN.Error.NotEladrin": "This character is not an Eladrin."
+}

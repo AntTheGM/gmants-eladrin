@@ -1,0 +1,87 @@
+{
+  "id": "gmants-eladrin",
+  "title": "GMAnt's Eladrin",
+  "description": "Eladrin season management for D&D 5e. Change your Eladrin's season with one click — swap token art, portrait, and Fey Step racial feature. Includes interactive Fey Step teleport with seasonal particle effects.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "GM Ant",
+      "url": "https://roleplayr.com/gmant"
+    }
+  ],
+  "esmodules": ["scripts/main.js"],
+  "styles": ["styles/module.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "5.0.0"
+        }
+      }
+    ],
+    "optional": [
+      {
+        "id": "midi-qol",
+        "type": "module",
+        "reason": "Enables automated Fey Step saves, damage rolls, and condition application"
+      },
+      {
+        "id": "sequencer",
+        "type": "module",
+        "reason": "Enables teleport visual effects (Fey Step departure/arrival animations)"
+      },
+      {
+        "id": "JB2A_DnD5e",
+        "type": "module",
+        "reason": "Provides animated assets for Fey Step teleport effects (free or patreon)"
+      }
+    ]
+  },
+  "packs": [
+    {
+      "name": "gmants-eladrin-macros",
+      "label": "Eladrin Macros",
+      "path": "packs/gmants-eladrin-macros",
+      "type": "Macro",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "gmants-eladrin-items",
+      "label": "Eladrin Season Items",
+      "path": "packs/gmants-eladrin-items",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "GMAnt's Eladrin",
+      "sorting": "m",
+      "packs": ["gmants-eladrin-macros", "gmants-eladrin-items"]
+    }
+  ],
+  "flags": {
+    "hotReload": true
+  }
+}
