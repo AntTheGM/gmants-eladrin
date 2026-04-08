@@ -13,10 +13,10 @@ export function registerSettings() {
   game.settings.register(MODULE_ID, "showEladrinButton", {
     name: "ELADRIN.Settings.ShowEladrinButton",
     hint: "ELADRIN.Settings.ShowEladrinButtonHint",
-    scope: "world",
+    scope: "client",
     config: true,
     type: Boolean,
-    default: true,
+    default: false,
     requiresReload: true,
   });
 

@@ -102,6 +102,142 @@ function drawSnowflake(gfx, color) {
   }
 }
 
+// -- Season Burst Class -------------------------------------------------------
+
+const BURST_PARTICLE_COUNT = 40;
+const BURST_LIFETIME = 1200; // ms — total burst duration
+const BURST_TICK = 30;
+const BURST_SCALE = 1.6;
+
+/**
+ * Outward explosion of seasonal particles from a token center.
+ * Used when an Eladrin changes season — particles radiate ~10ft outward.
+ */
+export class SeasonBurst {
+  /**
+   * @param {number} cx - Center X in canvas coords
+   * @param {number} cy - Center Y in canvas coords
+   * @param {string} seasonId - spring|summer|autumn|winter
+   * @param {number} [radiusFeet=10] - Explosion radius in feet
+   */
+  constructor(cx, cy, seasonId, radiusFeet = 10) {
+    this.cx = cx;
+    this.cy = cy;
+    this.config = SEASON_CONFIG[seasonId] ?? SEASON_CONFIG.autumn;
+    this._destroyed = false;
+
+    const gridSize = canvas.grid.size;
+    const gridDistance = canvas.grid.distance;
+    this.radiusPixels = (radiusFeet / gridDistance) * gridSize;
+
+    this.container = new PIXI.Container();
+    this.particles = [];
+
+    this._init();
+  }
+
+  _init() {
+    canvas.controls.addChild(this.container);
+
+    // Spawn all particles at once as a burst
+    for (let i = 0; i < BURST_PARTICLE_COUNT; i++) {
+      this._spawnParticle();
+    }
+
+    // Animate
+    this._animInterval = setInterval(() => {
+      if (this._destroyed) return;
+      this._animate();
+    }, BURST_TICK);
+  }
+
+  _spawnParticle() {
+    const angle = Math.random() * Math.PI * 2;
+    const gfx = this._createParticle();
+
+    // Start at center with slight random offset for organic feel
+    const startOffset = Math.random() * 8;
+    gfx.x = this.cx + Math.cos(angle) * startOffset;
+    gfx.y = this.cy + Math.sin(angle) * startOffset;
+    gfx.alpha = 0;
+
+    this.container.addChild(gfx);
+
+    // Each particle gets a slightly different speed and target radius
+    const speed = 0.7 + Math.random() * 0.6; // 0.7–1.3x speed variation
+    const targetR = this.radiusPixels * (0.6 + Math.random() * 0.5); // 60–110% of radius
+
+    this.particles.push({
+      gfx,
+      angle,
+      born: Date.now(),
+      speed,
+      targetR,
+      phase: Math.random() * Math.PI * 2,
+      startOffset,
+    });
+  }
+
+  _createParticle() {
+    const gfx = new PIXI.Graphics();
+    const colors = this.config.colors;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    this.config.drawParticle(gfx, color);
+    gfx.scale.set(BURST_SCALE, BURST_SCALE);
+    return gfx;
+  }
+
+  _animate() {
+    const now = Date.now();
+    let allDead = true;
+
+    for (let i = this.particles.length - 1; i >= 0; i--) {
+      const p = this.particles[i];
+      const age = now - p.born;
+      const t = age / BURST_LIFETIME;
+
+      if (t >= 1) {
+        p.gfx.destroy(true);
+        this.particles.splice(i, 1);
+        continue;
+      }
+
+      allDead = false;
+
+      // Ease-out radial movement: fast start, slow finish
+      const eased = 1 - Math.pow(1 - t * p.speed, 3);
+      const dist = p.startOffset + eased * p.targetR;
+      p.gfx.x = this.cx + Math.cos(p.angle) * dist;
+      p.gfx.y = this.cy + Math.sin(p.angle) * dist;
+
+      // Slight spin
+      p.gfx.rotation = age * 0.003 + p.phase;
+
+      // Alpha: quick fade-in, hold, longer fade-out
+      if (t < 0.08) p.gfx.alpha = t / 0.08;
+      else if (t > 0.5) p.gfx.alpha = Math.max(0, (1 - t) / 0.5);
+      else p.gfx.alpha = 0.9;
+
+      // Scale: start slightly small, grow, then shrink
+      const scaleCurve = Math.sin(t * Math.PI); // 0 → 1 → 0
+      const s = BURST_SCALE * (0.5 + 0.6 * scaleCurve);
+      p.gfx.scale.set(s, s);
+    }
+
+    if (allDead) this.destroy();
+  }
+
+  destroy() {
+    if (this._destroyed) return;
+    this._destroyed = true;
+    if (this._animInterval) clearInterval(this._animInterval);
+    for (const p of this.particles) p.gfx.destroy(true);
+    this.particles = [];
+    if (this.container.parent) this.container.parent.removeChild(this.container);
+    this.container.destroy({ children: true });
+  }
+}
+
 // -- Season Ring Class ---------------------------------------------------------
 
 export class SeasonRing {

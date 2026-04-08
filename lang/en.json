@@ -29,7 +29,7 @@
   "ELADRIN.Settings.UseMidiQolHint": "When enabled, season changes rename your existing Fey Step item instead of swapping it, preserving any MIDI QOL automation and effects. Requires: MIDI QOL. Optional: Sequencer + JB2A for teleport animations.",
 
   "ELADRIN.Settings.ShowEladrinButton": "Show Eladrin Season Button",
-  "ELADRIN.Settings.ShowEladrinButtonHint": "Display the Eladrin Season leaf icon in the token controls sidebar. Disable to hide the button (you can still open the dialog via macro).",
+  "ELADRIN.Settings.ShowEladrinButtonHint": "Force the Eladrin Season button on in the token controls sidebar. The button auto-appears when you own an Eladrin character; enable this to always show it.",
 
   "ELADRIN.Error.NoActor": "Select a token or assign a character first.",
   "ELADRIN.Error.NotEladrin": "This character is not an Eladrin."

@@ -22,7 +22,12 @@ Hooks.once("ready", () => {
 // -- Scene Control Button ------------------------------------------------------
 
 Hooks.on("getSceneControlButtons", (controls) => {
-  if (!game.settings.get(MODULE_ID, "showEladrinButton")) return;
+  // Show if GM forced the setting on, or if the current user owns an Eladrin
+  const settingOn = game.settings.get(MODULE_ID, "showEladrinButton");
+  const ownsEladrin = game.actors?.some(
+    (a) => a.isOwner && isEladrin(a)
+  );
+  if (!settingOn && !ownsEladrin) return;
 
   const tokenControls = controls.tokens;
   if (!tokenControls) return;

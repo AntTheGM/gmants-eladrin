@@ -13,6 +13,7 @@ import {
   deleteSeasonImages,
 } from "../image-manager.js";
 import { swapSeasonItems } from "../compendium-seeder.js";
+import { SeasonBurst } from "../season-particles.js";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -99,6 +100,27 @@ export class EladrinSeasonDialog extends HandlebarsApplicationMixin(
 
     // Swap Fey Step and Eladrin Season items
     await swapSeasonItems(this.#actor, seasonId);
+
+    // Play seasonal burst effect on the token
+    const token = canvas.tokens.placeables.find(
+      (t) => t.actor?.id === this.#actor.id
+    );
+    if (token) {
+      const center = token.center;
+
+      // JB2A misty step arrival effect (if Sequencer available)
+      if (typeof Sequencer !== "undefined" && typeof Sequence !== "undefined") {
+        new Sequence()
+          .effect()
+            .file("jb2a.misty_step.02.blue")
+            .atLocation(center)
+            .scaleToObject(1.5)
+          .play();
+      }
+
+      // Seasonal particle burst outward ~10ft
+      new SeasonBurst(center.x, center.y, seasonId, 10);
+    }
 
     // Chat message
     await ChatMessage.create({
